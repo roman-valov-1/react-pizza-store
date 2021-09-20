@@ -1,1 +1,1 @@
-# react-pizza-store
+# React Pizza Store
