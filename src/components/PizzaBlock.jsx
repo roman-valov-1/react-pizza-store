@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import React, { useState } from 'react';
+import classNames from 'classnames';
 
 function PizzaBlock({ name, imageUrl, price, types, sizes }) {
    const availableTypes = ['тонкое', 'традиционное'];
