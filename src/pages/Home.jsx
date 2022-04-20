@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { fetchPizzas } from "../redux/actions/pizzasAC";
 import { setCategory, setSortBy } from '../redux/actions/filtersAC';
+import { addPizzaToCart } from "../redux/actions/cartAC";
 
 import {
    Categories,
@@ -42,7 +43,8 @@ function Home() {
          category: filtersReducer.category,
          sortBy: filtersReducer.sortBy,
       }
-   })
+   });
+   const cartItems = useSelector(({cartReducer}) => cartReducer.items);
 
    React.useEffect(() => {
       dispatch(fetchPizzas(sortBy, category));
@@ -54,6 +56,10 @@ function Home() {
 
    const onSelectSortType = type => {
       dispatch(setSortBy(type));
+   };
+
+   const handleAddPizza = (obj) => {
+      dispatch(addPizzaToCart(obj));
    };
 
    return (
@@ -77,7 +83,9 @@ function Home() {
                   ? items.map((obj) => (
                      <PizzaBlock
                         key={obj.id}
-                        {...obj} />
+                        {...obj}
+                        onCLickAddPizza={handleAddPizza}
+                        addedCount={cartItems[obj.id]?.length} />
                   ))
                   : Array(12)
                      .fill(0)
