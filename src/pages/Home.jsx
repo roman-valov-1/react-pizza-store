@@ -50,11 +50,11 @@ function Home() {
       dispatch(fetchPizzas(sortBy, category));
    }, [sortBy, category]);
 
-   const onSelectCategory = index => {
+   const onSelectCategory = (index) => {
       dispatch(setCategory(index));
    };
 
-   const onSelectSortType = type => {
+   const onSelectSortType = (type) => {
       dispatch(setSortBy(type));
    };
 
@@ -85,7 +85,7 @@ function Home() {
                         key={obj.id}
                         {...obj}
                         onCLickAddPizza={handleAddPizza}
-                        addedCount={cartItems[obj.id]?.length} />
+                        addedCount={cartItems[obj.id]?.items?.length} />
                   ))
                   : Array(12)
                      .fill(0)
