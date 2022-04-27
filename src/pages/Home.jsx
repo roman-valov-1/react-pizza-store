@@ -18,7 +18,7 @@ const categoryNames = [
    'Вегетарианская',
    'Гриль',
    'Острые',
-   'Закрытые'
+   'Микс'
 ];
 
 const sortItems = [
@@ -27,11 +27,9 @@ const sortItems = [
    { name: 'алфавиту', type: 'name', order: 'asc' }
 ];
 
-
 function Home() {
-   
-
    const dispatch = useDispatch();
+
    const { items, isLoaded } = useSelector(({ pizzasReducer }) => {
       return {
          items: pizzasReducer.items,
@@ -42,9 +40,10 @@ function Home() {
       return {
          category: filtersReducer.category,
          sortBy: filtersReducer.sortBy,
-      }
+      };
    });
-   const cartItems = useSelector(({cartReducer}) => cartReducer.items);
+
+   const cartItems = useSelector(({ cartReducer }) => cartReducer.items);
 
    React.useEffect(() => {
       dispatch(fetchPizzas(sortBy, category));
@@ -70,7 +69,7 @@ function Home() {
                items={categoryNames}
                ActiveCategory={category}
             />
-            <SortPopup 
+            <SortPopup
                items={sortItems}
                activeSortType={sortBy.type}
                onSelectSortType={onSelectSortType}

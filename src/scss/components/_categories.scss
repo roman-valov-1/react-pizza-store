@@ -1,12 +1,12 @@
 @import '../variables';
 
 .categories {
+  margin-bottom: 20px;
   ul {
     display: flex;
-
     li {
       background-color: #f9f9f9;
-      padding: 13px 30px;
+      padding: 13px 25px;
       border-radius: 30px;
       margin-right: 10px;
       font-weight: bold;
@@ -27,5 +27,61 @@
         color: #fff;
       }
     }
+  }
+}
+
+@media (max-width: 575.98px) {
+  .categories {
+    ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      li {
+        margin: 0px 10px 10px 0px;
+
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767.98px) {
+  .categories {
+    ul {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      li {
+        margin: 0px 10px 10px 0px;
+
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .categories {
+    ul {
+      display: inline-flex;
+      flex-direction: row;
+      justify-content: space-between;
+  
+      li {
+        background-color: #f9f9f9;
+        padding: 7px 20px;
+        border-radius: 30px;
+        margin-right: 5px;
+      }
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+  .categories {
+    margin-bottom: 0px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .categories {
+    margin-bottom: 0px;
   }
 }

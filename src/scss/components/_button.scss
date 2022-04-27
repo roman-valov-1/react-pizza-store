@@ -1,4 +1,4 @@
-@import '../variables';
+@import "../variables";
 
 .button {
   display: inline-block;
@@ -146,3 +146,28 @@
     }
   }
 }
+
+@media (max-width: 575.98px) {
+  .button {
+    &--cart {
+      display: flex;
+      align-items: center;
+      line-height: 16px;
+      padding: 5px 15px;
+
+      svg {
+        width: 14px;
+        height: 14px;
+        margin-right: 5px;
+        margin-bottom: 1px;
+      }
+
+      span {
+        font-weight: 600;
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+

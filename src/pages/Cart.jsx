@@ -66,7 +66,7 @@ function Cart() {
                   </span>
                 </div>
               </div>
-              <div className="content__items">
+              <div className="content__items--cart">
                 {
                   addedPizzas.map(obj => (
                     <CartItem
