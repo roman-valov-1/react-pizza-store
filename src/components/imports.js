@@ -5,3 +5,4 @@ export { default as SortPopup } from './SortPopup';
 export { default as PizzaBlock } from './PizzaBlock/PizzaBlock';
 export { default as PizzaLoadingBlock } from './PizzaBlock/LoadingBlock';
 export { default as CartItem } from './CartItem';
+export { default as ModalPopUp } from './ModalPopUp';

@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 
 function SortPopup({ items, onSelectSortType, activeSortType }) {
    
-   useEffect(() => {
+   React.useEffect(() => {
       document.body.addEventListener('click', handleOutsideClick);
    }, []);
 
-   const [visiblePopup, setVisiblePopup] = useState(false);
-   const sortRef = useRef();
+   const [visiblePopup, setVisiblePopup] = React.useState(false);
+   const sortRef = React.useRef();
    const activeLabel = items.find(item => item.type === activeSortType).name;
 
    

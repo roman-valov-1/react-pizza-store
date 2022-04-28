@@ -8,28 +8,27 @@ import {
   plusCartItem,
   minusCartItem
 } from '../redux/actions/cartAC';
-import { CartItem } from '../components/imports';
+import { CartItem, Button, ModalPopUp } from '../components/imports';
 import emptyCartImage from '../assets/img/empty-cart.png';
 
 function Cart() {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(({ cartReducer }) => cartReducer);
-
+  
   const addedPizzas = Object.keys(items).map(key => {
     return items[key].items[0];
   });
 
+  const [modalActive, setModalActive] = React.useState(false);
+  const [typeModalPopUp, setTypeModalPopUp] = React.useState('');
+  const [idForRemove, setIdForRemove] = React.useState(null);
+
   const onClearCart = () => {
-    if (window.confirm('Are your sure?')) {
-      // Сделать нормальное всплывающее модальное окно
-      dispatch(clearCart());
-    }
+    dispatch(clearCart());
   };
 
   const onRemoveItem = (id) => {
-    if (window.confirm('Are your sure?')) {
-      dispatch(removeCartItem(id));
-    }
+    dispatch(removeCartItem(id));
   };
 
   const onPlusCartItem = (id) => {
@@ -38,6 +37,26 @@ function Cart() {
 
   const onMinusCartItem = (id) => {
     dispatch(minusCartItem(id));
+  };
+
+  const onSetActive = (string, id) => {
+    setTypeModalPopUp(string);
+    setModalActive(true);
+    setIdForRemove(id);
+  };
+
+  const onSetDeactive = (string) => {
+    console.log(idForRemove);
+    if (string === 'clear' || string === 'buy') {
+      onClearCart();
+      setModalActive(false);
+    } else if (string === 'remove') {
+      onRemoveItem(idForRemove);
+      setModalActive(false);
+      setIdForRemove(null);
+    } else {
+      setModalActive(false);
+    }
   };
 
   return (
@@ -61,7 +80,7 @@ function Cart() {
                     <path d="M11.6666 9.16667V14.1667" stroke="#B6B6B6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
 
-                  <span onClick={onClearCart}>
+                  <span onClick={() => onSetActive('clear')}>
                     Очистить корзину
                   </span>
                 </div>
@@ -72,6 +91,7 @@ function Cart() {
                     <CartItem
                       key={obj.id}
                       id={obj.id}
+                      image={obj.imageUrl}
                       name={obj.name}
                       type={obj.type}
                       size={obj.size}
@@ -80,6 +100,7 @@ function Cart() {
                       removeItem={onRemoveItem}
                       onPlus={onPlusCartItem}
                       onMinus={onMinusCartItem}
+                      setActive={onSetActive}
                     />
                   ))
                 }
@@ -97,9 +118,9 @@ function Cart() {
 
                     <span>Вернуться назад</span>
                   </Link>
-                  <div className="button pay-btn">
+                  <Button onClick={() => onSetActive('buy')}className="button pay-btn">
                     <span>Оплатить сейчас</span>
-                  </div>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -115,6 +136,11 @@ function Cart() {
               </Link>
             </div>
         }
+        <ModalPopUp 
+          active={modalActive} 
+          type={typeModalPopUp}
+          setDeactive={onSetDeactive}
+        />
       </div>
     </div>
   )
